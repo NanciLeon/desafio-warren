@@ -1,5 +1,5 @@
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		/* Exercicio 2
@@ -18,7 +18,8 @@ public class main {
 		*/
 	}
 	
-	public static void exercicio1(int limite) {
+	public static int exercicio1(int limite) {
+		int numerosReversiveis = 0;
 		for (int i = 11; i <= limite; i++) {
 			if (i % 10 == 0) {
 				continue;
@@ -29,9 +30,11 @@ public class main {
 			int soma = numero + reverso;
 			
 			if(verificaSeTodosOsDigitosSaoImpares(soma)) {
+				numerosReversiveis++;
 				System.out.println(numero);
 			}
 		}
+		return numerosReversiveis;
 	}
 	
 	
