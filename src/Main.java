@@ -3,15 +3,7 @@ import java.util.ArrayList;
 public class Main {
 
 	public static void main(String[] args) {
-		int numero = 10;
-		ArrayList<Integer> numeros = new ArrayList<Integer>();
-		numeros.add(2);
-		numeros.add(3);
-		numeros.add(4);
-		
-		ArrayList<Integer> soma = exercicio3(numeros, numero);
-		
-		System.out.println(soma);
+
 	}
 
 	public static int exercicio1(int limite) {
@@ -32,24 +24,40 @@ public class Main {
 		}
 		return numerosReversiveis;
 	}
-
+	
+	/**
+	 * 
+	 * @param numero
+	 * @return
+	 */
 	public static int inverterNumero(int numero) {
 		int numeroAux = numero, reverso = 0;
 		while (numeroAux != 0) {
+			// pega o ultimo digito do numeroAux
 			int resto = numeroAux % 10;
+			/**
+			 * multiplica por 10 para "criar" um novo digito e poder
+			 * juntar com o resto
+			 */
 			reverso = reverso * 10 + resto;
+			// remove o ultimo digito
 			numeroAux = numeroAux / 10;
 		}
 		return reverso;
 	}
-
+	
+	/*
+	 * @return retorna se todos os digitos daquele numero sao impares
+	 */
 	public static boolean verificaSeTodosOsDigitosSaoImpares(int numero) {
+		// converte numero em string para poder pegar os caracteres no for
 		String numeroEmString = Integer.toString(numero);
 
 		boolean tudoImpar = true;
 
-		for (int j = 0; j < numeroEmString.length(); j++) {
-			int digito = Character.getNumericValue(numeroEmString.charAt(j));
+		for (int i = 0; i < numeroEmString.length(); i++) {
+			// converte caracter da string em int
+			int digito = Character.getNumericValue(numeroEmString.charAt(i));
 
 			if (digito % 2 == 0) {
 				tudoImpar = false;
@@ -57,13 +65,14 @@ public class Main {
 		}
 		return tudoImpar;
 	}
-
+	
 	public static String exercicio2(int[] chegadasDeAlunos, int alunosPresentesParaTerAula) {
 		int alunosPontuais = 0;
+		/*
+		 * pega os alunos pontuais
+		 */
 		for (int i = 0; i < chegadasDeAlunos.length; i++) {
-
-			int chegadaDoAluno = chegadasDeAlunos[i];
-			if (chegadaDoAluno <= 0) {
+			if (chegadasDeAlunos[i] <= 0) {
 				alunosPontuais++;
 			}
 		}
@@ -80,6 +89,11 @@ public class Main {
 	public static ArrayList<Integer> exercicio3(ArrayList<Integer> numeros, int numero) {
 		ArrayList<ArrayList<Integer>> somasPossiveis = new ArrayList<ArrayList<Integer>>();
 		ArrayList<Integer> soma = new ArrayList<Integer>();
+		
+		/*
+		 * mantem tamanho original da lista, porque no for abaixo
+		 * o tamanho vai diminuindo
+		 */
 		int qtdDeNumeros = numeros.size();
 		
 		for (int i = 0; i < qtdDeNumeros; i++) {
@@ -88,6 +102,9 @@ public class Main {
 			}
 			Integer maiorNumero = numeros.get(0);
 			
+			/*
+			 * pega o maior numero da lista
+			 */
 			for (int j = 1; j < numeros.size(); j++) {
 				if (numeros.get(j) > maiorNumero) {
 					maiorNumero = numeros.get(j);
@@ -97,6 +114,9 @@ public class Main {
 			colocaValoresNaLista(soma, numero, maiorNumero);
 			
 			if(somarValoresDaLista(soma) < numero) {
+				/*
+				 * remove para buscar o proximo maior
+				 */
 				numeros.remove(maiorNumero);
 			}
 		}
@@ -104,9 +124,12 @@ public class Main {
 	}
 	
 	public static void colocaValoresNaLista(ArrayList<Integer> numeros, int numero, int numeroResta) {
-		int numeroAux = numero;
+		int limite = numero;
 		while (numero > 0) {
-			if(somarValoresDaLista(numeros) + numeroResta > numeroAux) {
+			/*
+			 * verifica para ver se pode adicionar o numeroResta
+			 */
+			if(somarValoresDaLista(numeros) + numeroResta > limite) {
 				break;
 			}
 			numero -= numeroResta;
